@@ -7,7 +7,7 @@ const express = require("express");
 const app = express();
 
 app.set("view engine", "ejs"); /* -=|> View Engine */
-app.use(express.static("public")); /* -=|> Static */
+app.use(express.static("./public")); /* -=|> Static */
 app.use(bodyParser.urlencoded({ extended: false })); /* -=|> Body-Parser */
 app.use(bodyParser.json()); /* -=|> Body-Parser */
 
@@ -21,9 +21,18 @@ connection
         console.log(err);
     });
 
-/* -=|> Routes */
+/* -=|> Controllers */
+const userController = require("./user/UserController.js");
+
+/* -=|> Models */
+const User = require("./user/User.js");
+
+/* -=|> Controller Routes */
+app.use("/", userController);
+
+/* -=|> Internal Routes */
 app.get("/", (req, res) => {
-    res.render("index.ejs");
+    res.render("./index.ejs");
 });
 
 /* -=|> Server Initialization */
