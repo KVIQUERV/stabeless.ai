@@ -1,18 +1,18 @@
-<%- include("../../partials/header") %>
+<%- include("../partials/header") %>
     <div class="container">
         <div class="card mt-5">
             <div class="card-header">
-                <h3>Criação de Usuário</h3>
+                <h3>Login de Admin</h3>
             </div>
             <class class="card-body">
-                <form action="/admin/users/create" method="POST">
+                <form action="/admin/authenticate" method="POST">
                     <input class="form-control" name="txt_email" type="email" placeholder="Digite o e-mail do usuário">
                     <br>
                     <input class="form-control" name="txt_password" type="password" placeholder="Digite a senha do usuário">
                     <br>
-                    <button type="submit" class="btn btn-success btn-block">Criar</button>
+                    <button type="submit" class="btn btn-success btn-block">Logar</button>
                 </form>
             </class>
         </div>
     </div>
-<%- include("../../partials/header") %>
+<%- include("../partials/header") %>

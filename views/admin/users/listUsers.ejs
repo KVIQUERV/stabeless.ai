@@ -1,1 +1,24 @@
-<h1>List users!</h1>
+<%- include("../../partials/header") %>
+    <div class="container">
+        <hr>
+        <h2>Lista de Usuários</h2>
+        <a class="btn btn-success" href="/admin/users/create">Criar</a>
+        <hr>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>E-mail</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach(user => { %>
+                <tr>
+                    <th><%= user.id %></th>
+                    <th><%= user.ds_email %></th>
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
+<%- include("../../partials/header") %>

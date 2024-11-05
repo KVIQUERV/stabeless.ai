@@ -1,5 +1,6 @@
 /* -=|> Libraries/Internal Files */
 const connection = require("./database/database.js");
+const session = require("express-session");
 const bodyParser = require("body-parser");
 const express = require("express");
 
@@ -7,6 +8,7 @@ const express = require("express");
 const app = express();
 
 app.set("view engine", "ejs"); /* -=|> View Engine */
+app.use(session({ secret: "J3z(6*H_x|J5y5l7", resave: true, saveUninitialized: true, cookie: { maxAge: 604800 } })); /* -=|> Session */
 app.use(express.static("./public")); /* -=|> Static */
 app.use(bodyParser.urlencoded({ extended: false })); /* -=|> Body-Parser */
 app.use(bodyParser.json()); /* -=|> Body-Parser */
@@ -23,12 +25,16 @@ connection
 
 /* -=|> Controllers */
 const userController = require("./user/UserController.js");
+const authUserController = require("./auth/AuthUserController.js");
+const authAdminController = require("./auth/AuthAdminController.js");
 
 /* -=|> Models */
 const User = require("./user/User.js");
 
 /* -=|> Controller Routes */
 app.use("/", userController);
+app.use("/", authUserController);
+app.use("/", authAdminController);
 
 /* -=|> Internal Routes */
 app.get("/", (req, res) => {

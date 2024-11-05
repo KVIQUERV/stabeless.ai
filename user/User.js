@@ -1,7 +1,7 @@
 const connection = require("../database/database.js");
 const sequelize = require("sequelize");
 
-const User = connection.define("users", {
+const User = connection.define("tb_users", {
     ds_email: {
         type: sequelize.STRING,
         allowNull: false
