@@ -26,7 +26,7 @@ router.post("/authenticate", (req, res) => {
                     email: user.ds_email
                 };
 
-                res.json(req.session.user);
+                res.redirect("/chat");
             } else {
                 res.redirect("/login");
             };

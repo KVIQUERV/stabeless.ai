@@ -27,14 +27,17 @@ connection
 const userController = require("./user/UserController.js");
 const authUserController = require("./auth/AuthUserController.js");
 const authAdminController = require("./auth/AuthAdminController.js");
+const chatController = require("./chat/ChatController.js");
 
 /* -=|> Models */
 const User = require("./user/User.js");
+const Chat = require("./chat/Chat.js");
 
 /* -=|> Controller Routes */
 app.use("/", userController);
 app.use("/", authUserController);
 app.use("/", authAdminController);
+app.use("/", chatController);
 
 /* -=|> Internal Routes */
 app.get("/", (req, res) => {
