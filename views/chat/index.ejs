@@ -3,9 +3,11 @@
     <head>
         <meta charset="utf-8">
         <title>Stabeless.AI</title>
+        <link rel="stylesheet" href="https://unpkg.com/@highlightjs/cdn-assets@11.7.0/styles/atom-one-dark.min.css"/>
         <link rel="stylesheet" href="/css/chat/style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <script src="https://unpkg.com/@highlightjs/cdn-assets@11.7.0/highlight.min.js"></script>
         <script src="/js/chat/script.js" defer></script>
     </head>
     <body>
@@ -26,10 +28,13 @@
                     <div class="chat incoming">
                         <div class="chat-content">
                             <div class="chat-details">
-                                <img src="https://static.diario24horas.com.br/images/uploads/2022/6/6/373-baymax-estreia-em-29-de-junho-no-disney-plus.jpg" alt="chatbot-img">
-                                <p><%= message.ds_message %></p>
+                                <img src="https://static.diario24horas.com.br/images/uploads/2022/6/6/373-baymax-estreia-em-29-de-junho-no-disney-plus.jpg" class="img-ai" alt="chatbot-img">
+<pre>
+    <code class="hljs">
+<%= message.ds_message %>   
+    </code>
+</pre>
                             </div>
-                            <span onclick="copyResponse(this)" class="material-symbols-rounded">content_copy</span>
                         </div>
                     </div>
                 <% }; %>

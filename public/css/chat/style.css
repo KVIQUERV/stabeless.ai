@@ -103,18 +103,8 @@ span.material-symbols-rounded {
     cursor: pointer;
 }
 
-.chat .chat-content span {
-    cursor: pointer;
-    font-size: 1.3rem;
-    color: var(--icon-color);
-    visibility: hidden;
-}
-
-.chat:hover .chat-content:not(:has(.typing-animation), :has(.error)) span {
-    visibility: visible;
-}
-
 .chat .chat-details {
+    width: 100%;
     display: flex;
     align-items: center;
 }
@@ -159,17 +149,13 @@ span.material-symbols-rounded {
 }
 
 @keyframes animateDots {
-
-    0%,
-    44% {
+    0%, 44% {
         transform: translateY(0px);
     }
-
     28% {
         opacity: 0.4;
         transform: translateY(-6px);
     }
-
     44% {
         opacity: 0.2;
     }
@@ -233,15 +219,24 @@ span.material-symbols-rounded {
     position: absolute;
     right: 0;
     bottom: 0;
-    visibility: hidden;
+    visibility: visible;
 }
 
-.typing-textarea textarea:valid~span {
+.img-ai {
+    margin-right: 25px;
+};
+
+.typing-textarea textarea:valid ~ span {
     visibility: visible;
 }
 
 .typing-controls {
     display: flex;
+}
+
+span.material-symbols-rounded {
+    user-select: none;
+    cursor: pointer;
 }
 
 .typing-controls span {
@@ -255,7 +250,26 @@ span.material-symbols-rounded {
     background: var(--icon-hover-bg);
 }
 
-/* Reponsive Media Query */
+.hljs {
+    background: transparent!important;
+}
+
+pre {
+    padding: 0px!important;
+}
+
+pre, code {
+    display: flex;
+    color: #f8f8f2;
+    padding: 0px!important;
+    border-radius: 5px;
+    font-size: 0.95rem;
+    word-wrap: break-word;
+    overflow-x: auto;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+}
+
 @media screen and (max-width: 600px) {
     .default-text h1 {
         font-size: 2.3rem;
@@ -278,10 +292,6 @@ span.material-symbols-rounded {
         padding: 0 20px;
     }
 
-    .chat .chat-content:not(:has(.typing-animation), :has(.error)) span {
-        visibility: visible;
-    }
-
     .typing-container {
         padding: 15px 10px;
     }
@@ -295,9 +305,5 @@ span.material-symbols-rounded {
         height: 45px;
         width: 45px;
         margin-left: 5px;
-    }
-
-    span.material-symbols-rounded {
-        font-size: 1.25rem !important;
     }
 }
