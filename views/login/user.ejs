@@ -6,6 +6,7 @@
         <link rel="icon" type="image/png" href="/img/logo2.png" />
         <link rel="stylesheet" href="/css/login/style.css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="/js/login/script.js" defer></script>
     </head>
     <body>
@@ -38,4 +39,14 @@
             <section class="wallpaper"></section>
         </main>
     </body>
+
+    <% if (errorMsg && errorMsg.length > 0) { %>
+        <script>
+            Swal.fire({
+                title: "Erro!",
+                text: "<%= errorMsg[0] %>",
+                icon: "error"
+            });
+        </script>
+    <% } %>
 </html>

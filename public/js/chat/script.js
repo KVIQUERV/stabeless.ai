@@ -169,18 +169,48 @@ const handleOutgoingChat = () => {
 };
 
 deleteButton.addEventListener("click", async () => {
-    if (confirm("Você tem certeza que deseja excluir este chat?")) {
-        const response = await (await fetch("/deleteChat", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                id_user: userId,
-            })
-        })).json();
-        loadCleanedChat();
-    };
+    Swal.fire({
+        title: "Deseja deletar as mensagens?",
+        text: "Não será possível recuperá-las!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Sim, desejo deletar!",
+        cancelButtonText: "Não"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                await fetch("/deleteChat", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        id_user: userId,
+                    })
+                })
+                .then(async res => {
+                    const jsonRes = await res.json();
+
+                    Swal.fire({
+                        title: "Sucesso!",
+                        text: jsonRes.message,
+                        icon: "success"
+                    });
+                    loadCleanedChat();
+                })
+                .catch(async err => {
+                    const jsonRes = await err.json();
+
+                    Swal.fire({
+                        title: "Erro!",
+                        text: jsonRes.message,
+                        icon: "error"
+                    });
+                });
+            }
+        }
+    );
 });
 
 themeButton.addEventListener("click", () => {

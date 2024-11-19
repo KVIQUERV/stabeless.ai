@@ -2,6 +2,7 @@
 const connection = require("./database/database.js");
 const session = require("express-session");
 const bodyParser = require("body-parser");
+const flash = require("connect-flash");
 const express = require("express");
 
 /* -=|> Express Instance */
@@ -12,6 +13,7 @@ app.use(session({ secret: "J3z(6*H_x|J5y5l7", resave: true, saveUninitialized: t
 app.use(express.static("./public")); /* -=|> Static */
 app.use(bodyParser.urlencoded({ extended: false })); /* -=|> Body-Parser */
 app.use(bodyParser.json()); /* -=|> Body-Parser */
+app.use(flash()); /* -=|> Connect-flash */
 
 /* -=|> Database Connection */
 connection
@@ -41,7 +43,7 @@ app.use("/", chatController);
 
 /* -=|> Internal Routes */
 app.get("/", (req, res) => {
-    res.render("./index.ejs");
+    res.render("initial/index.ejs");
 });
 
 /* -=|> Server Initialization */

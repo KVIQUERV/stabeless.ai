@@ -1,24 +1,94 @@
-<%- include("../../partials/header") %>
-    <div class="container">
-        <hr>
-        <h2>Lista de Usuários</h2>
-        <a class="btn btn-success" href="/admin/users/create">Criar</a>
-        <hr>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>E-mail</th>
-                </tr>
-            </thead>
-            <tbody>
-                <% users.forEach(user => { %>
-                <tr>
-                    <th><%= user.id %></th>
-                    <th><%= user.ds_email %></th>
-                </tr>
-                <% }); %>
-            </tbody>
-        </table>
-    </div>
-<%- include("../../partials/header") %>
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <title>Stabeless.AI</title>
+        <link rel="icon" type="image/png" href="/img/logo2.png" />
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+        <link rel="stylesheet" href="/css/animate.min.css">
+        <link rel="stylesheet" href="/css/admin/style.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="/admin/users" class="navbar-brand">Stabeless.AI</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a><span class="bi bi-person-circle">&nbsp;&nbsp;&nbsp;</span>Olá, <%= loggedUser.name %></a></li>
+                        <li class="active"><a><span class="bi bi-shield-fill"></span></a></li>
+                        <li><a href="/admin/logout">Deslogar</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container-fluid">
+            <div class="col-md-2">
+                <div id="sidebar">
+                    <ul class="nav navbar-nav side-bar">
+                        <li class="side-bar"><a href="/admin/users"><span class="bi bi-people-fill">&nbsp;&nbsp;&nbsp;</span>Usuários</a></li>
+                        <!-- <li class="side-bar"><a href="#"><span class="bi bi-chat-right-text-fill">&nbsp;&nbsp;&nbsp;</span>Chats</a></li> -->
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-10 animated bounce">
+                <h1 class="page-header">Lista de Usuários</h1>
+                <a href="/admin/users/create"><button class="btn btn-success"><span class="bi bi-person-fill-add">&nbsp;&nbsp;&nbsp;Adicionar</span></button></a>
+                <hr>
+                <table class="table table-hover">
+                    <thead>
+                        <th width="3%">ID</th>
+                        <th width="20%">Nome</th>
+                        <th width="20%">E-mail</th>
+                        <th width="20%">Admin</th>
+                        <th width="20%">Status</th>
+                        <th width="3%">&nbsp;</th>
+                    </thead>
+                    <tbody>
+                        <% users.forEach(user => { %>
+                            <tr>
+                                <td><%= user.id %></td>
+                                <td><%= user.ds_name %></td>
+                                <td><%= user.ds_email %></td>
+                                <td><% if (user.fl_isAdmin) { %>Verdadeiro<% } else { %>Falso<% }; %></td>
+                                <td><% if (user.fl_isActive) { %><span class="label label-success">Ativo</span><% } else { %><span class="label label-danger">Inativo</span><% }; %></td>
+                                <td><a href="/admin/users/update/<%= user.id %>"><span class="bi bi-pencil-square"></span></a></td>
+                            </tr>
+                        <% }); %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
+        <script src="/js/jquery.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+        <% if (errorMsg && errorMsg.length > 0) { %>
+            <script>
+                Swal.fire({
+                    title: "Erro!",
+                    text: "<%= errorMsg[0] %>",
+                    icon: "error"
+                });
+            </script>
+        <% } %>
+
+        <% if (successMsg && successMsg.length > 0) { %>
+            <script>
+                Swal.fire({
+                    title: "Sucesso!",
+                    text: "<%= successMsg[0] %>",
+                    icon: "success"
+                });
+            </script>
+        <% } %>
+    </body>
+</html>

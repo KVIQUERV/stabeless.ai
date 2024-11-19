@@ -5,7 +5,7 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/admin/login", (req, res) => {
-    res.render("login/admin.ejs");
+    res.render("login/admin.ejs", { errorMsg: req.flash("error") });
 });
 
 router.post("/admin/authenticate", (req, res) => {
@@ -21,20 +21,34 @@ router.post("/admin/authenticate", (req, res) => {
             const passwordCompare = bcrypt.compareSync(txt_password, user.ds_password);
 
             if (passwordCompare) {
+                if (!user.fl_isActive) {
+                    req.flash("error", "Usuário desativado, contate um administrador!");
+                    return res.redirect("/admin/login");
+                };
+
+                if (!user.fl_isAdmin) {
+                    req.flash("error", "Usuário não autorizado, contate um administrador!");
+                    return res.redirect("/admin/login");
+                };
+
                 req.session.user = {
                     id: user.id,
+                    name: user.ds_name,
                     email: user.ds_email
                 };
 
-                res.json(req.session.user);
+                return res.redirect("/admin/users");
             } else {
-                res.redirect("/admin/login");
+                req.flash("error", "Usuário ou senha incorretos, tente novamente!");
+                return res.redirect("/admin/login");
             };
         } else {
-            res.redirect("/admin/login");
+            req.flash("error", "Usuário não encontrado, contate um administrador!");
+            return res.redirect("/admin/login");
         };
     });
 });
+
 
 router.get("/admin/logout", adminAuth, (req, res) => {
     req.session.user = null;

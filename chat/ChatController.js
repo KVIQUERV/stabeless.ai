@@ -132,12 +132,14 @@ router.post("/deleteChat", async (req, res) => {
                 id_user
             }
         })
-        .then(res.status(200).json({ message: "Successfull delete" }))
-        .catch(err => res.status(500).json(err));
+        .then(res.status(200).json({ message: "Mensagens deletadas com sucesso! :)" }))
+        .catch((err) => {
+            console.log(err);
+            return res.status(500).json({ message: "Um erro ocorreu durante a deleção das mensagens! :(" });
+        });
     } catch (err) {
         console.error(err);
-        res.status(500).json({ err });
-    }
+    };
 });
 
 module.exports = router;

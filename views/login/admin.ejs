@@ -1,18 +1,76 @@
-<%- include("../partials/header") %>
-    <div class="container">
-        <div class="card mt-5">
-            <div class="card-header">
-                <h3>Stabeless.AI</h3>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Stabeless.AI</title>
+    <link rel="icon" type="image/png" href="/img/logo2.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,600" rel="stylesheet">
+    <link rel="stylesheet" href="/css/loginAdmin/style.css">
+</head>
+<body>
+    <div id="back">
+        <canvas id="canvas" class="canvas-back"></canvas>
+        <div class="backRight"></div>
+        <div class="backLeft"></div>
+    </div>
+    <div id="slideBox">
+        <div class="topLayer">
+            <div class="right">
+                <div class="content">
+                    <h2>Login</h2>
+                    <form action="/admin/authenticate" id="form-login" method="POST">
+                        <div class="form-element form-stack">
+                            <label for="username-login" class="form-label">E-mail</label>
+                            <input id="username-login" type="email" name="txt_email">
+                        </div>
+                        <div class="form-element form-stack">
+                            <label for="password-login" class="form-label">Senha</label>
+                            <input id="password-login" type="password" name="txt_password">
+                        </div>
+                        <div class="form-element form-submit">
+                            <button id="logIn" class="login" type="submit" disabled>Logar</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <class class="card-body">
-                <form action="/admin/authenticate" method="POST">
-                    <input class="form-control" name="txt_email" type="email" placeholder="Digite o e-mail do usuário">
-                    <br>
-                    <input class="form-control" name="txt_password" type="password" placeholder="Digite a senha do usuário">
-                    <br>
-                    <button type="submit" class="btn btn-success btn-block">Logar</button>
-                </form>
-            </class>
         </div>
     </div>
-<%- include("../partials/header") %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.11.3/paper-full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="/js/loginAdmin/script.js"></script>
+
+    <% if (errorMsg && errorMsg.length > 0) { %>
+        <script>
+            Swal.fire({
+                title: "Erro!",
+                text: "<%= errorMsg[0] %>",
+                icon: "error"
+            });
+        </script>
+    <% } %>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const emailInput = document.getElementById("username-login");
+            const passwordInput = document.getElementById("password-login");
+            const loginButton = document.getElementById("logIn");
+    
+            function validateForm() {
+                const email = emailInput.value.trim();
+                const password = passwordInput.value.trim();
+    
+                if (email && password.length >= 8) {
+                    loginButton.disabled = false;
+                } else {
+                    loginButton.disabled = true;
+                }
+            }
+    
+            emailInput.addEventListener("input", validateForm);
+            passwordInput.addEventListener("input", validateForm);
+        });
+    </script>
+</body>
+</html>

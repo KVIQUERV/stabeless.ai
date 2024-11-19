@@ -43,23 +43,30 @@
                 <hr>
                 <div class="card mt-5">
                     <class class="card-body">
-                        <form action="/admin/users/create" method="POST">
+                        <form action="/admin/users/update" method="POST">
+                            <input type="hidden" name="id_user" value="<%= user.id %>">
                             <label for="txt_name">Nome</label>
-                            <input class="form-control" id="txt_name" name="txt_name" type="text" placeholder="Nome" required>
+                            <input class="form-control" id="txt_name" name="txt_name" type="text" placeholder="Nome" value="<%= user.ds_name %>">
                             <br>
                             <label for="txt_email">E-mail</label>
-                            <input class="form-control" id="txt_email" name="txt_email" type="email" placeholder="E-mail" required>
+                            <input class="form-control" id="txt_email" name="txt_email" type="email" placeholder="E-mail" value="<%= user.ds_email %>">
                             <br>
                             <label for="txt_password">Senha</label>
-                            <input class="form-control" id="txt_password" name="txt_password" type="password" placeholder="Senha" required>
+                            <input class="form-control" id="txt_password" name="txt_password" type="password" placeholder="Por motivos de segurança, a senha não será exibida. Caso deseje realizar a alteração da senha, digite a senha nova">
                             <br>
                             <label for="cmb_isAdmin">Permissão do Usuário</label>
                             <select class="form-control" id="cmb_isAdmin" name="cmb_isAdmin">
-                                <option value="0">Comum</option>
-                                <option value="1">Administrador</option>
+                                <option value="0" <% if (user.fl_isAdmin === 0) { %>selected<% }; %>>Comum</option>
+                                <option value="1" <% if (user.fl_isAdmin === 1) { %>selected<% }; %>>Administrador</option>
                             </select>
                             <br>
-                            <button type="submit" class="btn btn-success btn-block">Criar</button>
+                            <label for="cmb_isAdmin">Ativo</label>
+                            <select class="form-control" id="cmb_isActive" name="cmb_isActive">
+                                <option value="0" <% if (user.fl_isActive === 0) { %>selected<% }; %>>Não</option>
+                                <option value="1" <% if (user.fl_isActive === 1) { %>selected<% }; %>>Sim</option>
+                            </select>
+                            <br>
+                            <button type="submit" class="btn btn-success btn-block">Atualizar</button>
                         </form>
                     </class>
                 </div>
