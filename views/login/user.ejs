@@ -16,6 +16,10 @@
                     <div class="wrapper">
                         <img src="img/logo1.png" class="login__logo">
                         <h1 class="login__title">Realizar login</h1>
+                        <label class="login__label" id="txt_name" style="display: none;">
+                            <span>Nome</span>
+                            <input type="text" name="txt_name" class="input">
+                        </label>
                         <label class="login__label">
                             <span>E-mail</span>
                             <input type="email" name="txt_email" class="input">
@@ -46,6 +50,34 @@
                 title: "Erro!",
                 text: "<%= errorMsg[0] %>",
                 icon: "error"
+            });
+        </script>
+    <% } %>
+
+    <% if (successMsg && successMsg.length > 0) { %>
+        <script>
+            let timerInterval;
+            Swal.fire({
+                title: "Sucesso!",
+                html: "Você será redirecionado para o chat em <b></b> segundos!",
+                icon: "success",
+                timer: 5000,
+                timerProgressBar: true,
+                allowOutsideClick: false,
+                didOpen: () => {
+                    Swal.showLoading();
+                    const timer = Swal.getPopup().querySelector("b");
+                    timerInterval = setInterval(() => {
+                        timer.textContent = `${parseInt(Swal.getTimerLeft() / 1000) + 1}`;
+                    }, 100);
+                },
+                willClose: () => {
+                    clearInterval(timerInterval);
+                }
+            }).then((result) => {
+                if (result.dismiss === Swal.DismissReason.timer) {
+                    window.location.href = "/chat";
+                };
             });
         </script>
     <% } %>

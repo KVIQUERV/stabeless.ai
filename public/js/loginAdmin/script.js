@@ -1,10 +1,7 @@
 paper.install(window);
 paper.setup(document.getElementById("canvas"));
 
-var canvasWidth,
-    canvasHeight,
-    canvasMiddleX,
-    canvasMiddleY;
+var canvasWidth, canvasHeight, canvasMiddleX, canvasMiddleY;
 
 var shapeGroup = new Group();
 
@@ -16,7 +13,7 @@ function getCanvasBounds() {
     canvasMiddleX = canvasWidth / 2;
     canvasMiddleY = canvasHeight / 2;
     var position1 = {
-        x: (canvasMiddleX / 2) + 100,
+        x: canvasMiddleX / 2 + 100,
         y: 100,
     };
 
@@ -26,7 +23,7 @@ function getCanvasBounds() {
     };
 
     var position3 = {
-        x: (canvasMiddleX - 50) + (canvasMiddleX / 2),
+        x: canvasMiddleX - 50 + canvasMiddleX / 2,
         y: 150,
     };
 
@@ -55,8 +52,17 @@ function getCanvasBounds() {
         y: canvasMiddleY + 100,
     };
 
-    positionArray = [position3, position2, position5, position4, position1, position6, position7, position8];
-};
+    positionArray = [
+        position3,
+        position2,
+        position5,
+        position4,
+        position1,
+        position6,
+        position7,
+        position8,
+    ];
+}
 
 function initializeShapes() {
     getCanvasBounds();
@@ -69,7 +75,7 @@ function initializeShapes() {
         "M331.9,3.6l-331,45l231,304l445-156l-76-196l-148,54L331.9,3.6z",
         "M389,352l92-113l195-43l0,0l0,0L445,48l-80,1L122.7,0L0,275.2L162,297L389,352",
         "M 50 100 L 300 150 L 550 50 L 750 300 L 500 250 L 300 450 L 50 100",
-        "M 700 350 L 500 350 L 700 500 L 400 400 L 200 450 L 250 350 L 100 300 L 150 50 L 350 100 L 250 150 L 450 150 L 400 50 L 550 150 L 350 250 L 650 150 L 650 50 L 700 150 L 600 250 L 750 250 L 650 300 L 700 350 "
+        "M 700 350 L 500 350 L 700 500 L 400 400 L 200 450 L 250 350 L 100 300 L 150 50 L 350 100 L 250 150 L 450 150 L 400 50 L 550 150 L 350 250 L 650 150 L 650 50 L 700 150 L 600 250 L 750 250 L 650 300 L 700 350 ",
     ];
 
     for (var i = 0; i <= shapePathData.length; i++) {
@@ -82,7 +88,7 @@ function initializeShapes() {
         headerShape.scale(2);
         headerShape.position = positionArray[i];
     }
-};
+}
 
 initializeShapes();
 

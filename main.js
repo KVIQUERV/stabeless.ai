@@ -9,7 +9,14 @@ const express = require("express");
 const app = express();
 
 app.set("view engine", "ejs"); /* -=|> View Engine */
-app.use(session({ secret: "J3z(6*H_x|J5y5l7", resave: true, saveUninitialized: true, cookie: { maxAge: 604800 } })); /* -=|> Session */
+app.use(
+    session({
+        secret: "J3z(6*H_x|J5y5l7",
+        resave: true,
+        saveUninitialized: true,
+        cookie: { maxAge: 604800 },
+    })
+); /* -=|> Session */
 app.use(express.static("./public")); /* -=|> Static */
 app.use(bodyParser.urlencoded({ extended: false })); /* -=|> Body-Parser */
 app.use(bodyParser.json()); /* -=|> Body-Parser */

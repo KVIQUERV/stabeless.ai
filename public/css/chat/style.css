@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
 
 * {
     margin: 0;
@@ -8,7 +8,7 @@
 }
 
 :root {
-    --text-color: #FFFFFF;
+    --text-color: #ffffff;
     --icon-color: #676767;
     --icon-hover-bg: #3b3b3b;
     --placeholder-color: #dcdcdc;
@@ -19,14 +19,18 @@
 }
 
 .light-mode {
-    --text-color: #212121;
+    --text-color: #0d0d0d;
     --icon-color: #a9a9bc;
     --icon-hover-bg: #f1f1f3;
     --placeholder-color: #6c6c6c;
-    --outgoing-chat-bg: #FFFFFF;
-    --incoming-chat-bg: #F7F7F8;
-    --outgoing-chat-border: #FFFFFF;
-    --incoming-chat-border: #D9D9E3;
+    --outgoing-chat-bg: #eaeaea;
+    --incoming-chat-bg: #f2f2f2;
+    --outgoing-chat-border: #ffffff;
+    --incoming-chat-border: #d9d9e3;
+}
+
+body.light-mode .hljs {
+    color: #333333;
 }
 
 body {
@@ -149,7 +153,8 @@ span.material-symbols-rounded {
 }
 
 @keyframes animateDots {
-    0%, 44% {
+    0%,
+    44% {
         transform: translateY(0px);
     }
     28% {
@@ -224,7 +229,7 @@ span.material-symbols-rounded {
 
 .img-ai {
     margin-right: 25px;
-};
+}
 
 .typing-textarea textarea:valid ~ span {
     visibility: visible;
@@ -251,17 +256,18 @@ span.material-symbols-rounded {
 }
 
 .hljs {
-    background: transparent!important;
+    background: transparent !important;
 }
 
 pre {
-    padding: 0px!important;
+    padding: 0px !important;
 }
 
-pre, code {
+pre,
+code {
     display: flex;
     color: #f8f8f2;
-    padding: 0px!important;
+    padding: 0px !important;
     border-radius: 5px;
     font-size: 0.95rem;
     word-wrap: break-word;

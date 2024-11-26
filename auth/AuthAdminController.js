@@ -14,41 +14,56 @@ router.post("/admin/authenticate", (req, res) => {
 
     User.findOne({
         where: {
-            ds_email: txt_email
-        }
-    }).then(user => {
+            ds_email: txt_email,
+        },
+    }).then((user) => {
         if (user) {
-            const passwordCompare = bcrypt.compareSync(txt_password, user.ds_password);
+            const passwordCompare = bcrypt.compareSync(
+                txt_password,
+                user.ds_password
+            );
 
             if (passwordCompare) {
                 if (!user.fl_isActive) {
-                    req.flash("error", "Usuário desativado, contate um administrador!");
+                    req.flash(
+                        "error",
+                        "Usuário desativado, contate um administrador!"
+                    );
                     return res.redirect("/admin/login");
-                };
+                }
 
                 if (!user.fl_isAdmin) {
-                    req.flash("error", "Usuário não autorizado, contate um administrador!");
+                    req.flash(
+                        "error",
+                        "Usuário não autorizado, contate um administrador!"
+                    );
                     return res.redirect("/admin/login");
-                };
+                }
 
                 req.session.user = {
                     id: user.id,
                     name: user.ds_name,
-                    email: user.ds_email
+                    email: user.ds_email,
+                    isAdmin: user.fl_isAdmin,
                 };
 
                 return res.redirect("/admin/users");
             } else {
-                req.flash("error", "Usuário ou senha incorretos, tente novamente!");
+                req.flash(
+                    "error",
+                    "Usuário ou senha incorretos, tente novamente!"
+                );
                 return res.redirect("/admin/login");
-            };
+            }
         } else {
-            req.flash("error", "Usuário não encontrado, contate um administrador!");
+            req.flash(
+                "error",
+                "Usuário não encontrado, contate um administrador!"
+            );
             return res.redirect("/admin/login");
-        };
+        }
     });
 });
-
 
 router.get("/admin/logout", adminAuth, (req, res) => {
     req.session.user = null;

@@ -3,7 +3,7 @@ function adminAuth(req, res, next) {
         next();
     } else {
         res.redirect("/login");
-    };
-};
+    }
+}
 
 module.exports = adminAuth;
